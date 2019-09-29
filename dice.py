@@ -22,7 +22,6 @@ class Die(object):
     So use this method to give it a judgement when you need
     to change the instance attributes.
     """
-
     def set_sides(self, sides_change):
         if sides_change >= 4:
             if sides_change != 6:

@@ -1,4 +1,3 @@
-from __future__ import print_function
 # Script Name		: ping_subnet.py
 # Author				: Craig Richards
 # Created				: 12th January 2012
@@ -16,8 +15,8 @@ import sys						# Load the Library Module
 filename = sys.argv[0]																				# Sets a variable for the script name
 
 if '-h' in sys.argv or '--h' in sys.argv or '-help' in sys.argv or '--help' in sys.argv:	# Help Menu if called
-    print('''
-You need to supply the first octets of the address Usage : ''' + filename + ''' 111.111.111 ''')
+    print '''
+You need to supply the first octets of the address Usage : ''' + filename + ''' 111.111.111 '''
     sys.exit(0)
 else:
 

@@ -1,4 +1,3 @@
-from __future__ import print_function
 # author:zhangshuyx@gmail.com
 
 #!/usr/bin/env python
@@ -33,8 +32,8 @@ def merge():
 # the main program
 
 def main():
-    print("\t\tMerge\n\n")
-    print("This program merges csv-files to one file\n")
+    print "\t\tMerge\n\n"
+    print "This program merges csv-files to one file\n"
     merge()
 
 if __name__ == '__main__':
