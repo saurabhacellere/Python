@@ -1,7 +1,9 @@
+import sys
+
 try:
-    input = raw_input
-except NameError:
-    pass
+    input_func = raw_input
+except:
+    input_func = input
 
 
 def count_chars(filename):
@@ -19,7 +21,7 @@ def main():
     #Try to open file if exist else raise exception and try again
     while(is_exist):
         try:
-            inputFile = input("File Name / (0)exit : ").strip()
+            inputFile = input_func("File Name / (0)exit : ")
             if inputFile == "0":
                 break
             print(count_chars(inputFile))

@@ -19,7 +19,7 @@ import pygame
 import random
 
  
-# Define Four Colours
+# Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
@@ -27,7 +27,7 @@ RED = (255, 0, 0)
 
 pygame.init()
 
-# Setting the width and height of the screen [width, height]
+# Set the width and height of the screen [width, height]
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 
@@ -79,11 +79,11 @@ class Ball(object):
         if brickwall.collide(self):
             self.__yVel *= -1
 
-        # collision detection between ball and paddle
+        # collision detection between ball and paddle.
+        paddleX = paddle._xLoc
         paddleY = paddle._yLoc
         paddleW = paddle._width
         paddleH = paddle._height
-        paddleX = paddle._xLoc
         ballX = self._xLoc
         ballY = self._yLoc
 
