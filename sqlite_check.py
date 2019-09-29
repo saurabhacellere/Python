@@ -1,4 +1,3 @@
-from __future__ import print_function
 # Script Name	: sqlite_check.py
 # Author		: Craig Richards
 # Created		: 20 May 2013
@@ -24,12 +23,12 @@ try:
     cur = con.cursor()
     cur.execute('SELECT SQLITE_VERSION()')
     data = cur.fetchone()
-    print("SQLite version: %s" % data)
+    print "SQLite version: %s" % data
 
 
-except lite.Error as e:
+except lite.Error, e:
 
-    print("Error %s:" % e.args[0])
+    print "Error %s:" % e.args[0]
     sys.exit(1)
 
 finally:
@@ -43,13 +42,13 @@ cur=con.cursor()
 cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
 rows = cur.fetchall()
 for row in rows:
-  print(row)
+    print row
 
 con = lite.connect(master_db)
 cur=con.cursor()
 cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
 while True:
-  row = cur.fetchone()
-  if row == None:
-    break
-  print(row[0])
+    row = cur.fetchone()
+    if row == None:
+        break
+    print row[0]
