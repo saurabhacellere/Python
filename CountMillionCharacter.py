@@ -1,14 +1,6 @@
-"""
-Simple million word count program.
-main idea is Python pairs words
-with the number of times
-that number appears in the triple quoted string.
-Credit to William J. Turkel and Adam Crymble for the word
-frequency code used below. I just merged the two ideas.
-"""
-import re
-pattern = re.compile("\W")
-wordstring = '''SCENE I. Yorkshire. Gaultree Forest.
+import pprint
+info = '''SCENE I. Yorkshire. Gaultree Forest.
+
 Enter the ARCHBISHOP OF YORK, MOWBRAY, LORD HASTINGS, and others
 ARCHBISHOP OF YORK
 What is this forest call'd?
@@ -36,6 +28,7 @@ MOWBRAY
 Thus do the hopes we have in him touch ground
 And dash themselves to pieces.
 Enter a Messenger
+
 HASTINGS
 Now, what news?
 Messenger
@@ -49,6 +42,7 @@ Let us sway on and face them in the field.
 ARCHBISHOP OF YORK
 What well-appointed leader fronts us here?
 Enter WESTMORELAND
+
 MOWBRAY
 I think it is my Lord of Westmoreland.
 WESTMORELAND
@@ -231,6 +225,7 @@ Which must decide it.
 ARCHBISHOP OF YORK
 My lord, we will do so.
 Exit WESTMORELAND
+
 MOWBRAY
 There is a thing within my bosom tells me
 That no conditions of our peace can stand.
@@ -249,7 +244,7 @@ We shall be winnow'd with so rough a wind
 That even our corn shall seem as light as chaff
 And good from bad find no partition.
 ARCHBISHOP OF YORK
-No, no, my lord. Note this;    the king is weary
+No, no, my lord. Note this; the king is weary
 Of dainty and such picking grievances:
 For he hath found to end one doubt by death
 Revives two greater in the heirs of life,
@@ -283,6 +278,7 @@ MOWBRAY
 Be it so.
 Here is return'd my Lord of Westmoreland.
 Re-enter WESTMORELAND
+
 WESTMORELAND
 The prince is here at hand: pleaseth your lordship
 To meet his grace just distance 'tween our armies.
@@ -291,20 +287,10 @@ Your grace of York, in God's name then, set forward.
 ARCHBISHOP OF YORK
 Before, and greet his grace: my lord, we come.
 Exeunt'''
+count = { }
+for character in info.upper():
+    count.setdefault(character, 0)
+    count[character] = count[character]+1
 
-wordlist = wordstring.split()
-
-for x, y in enumerate(wordlist):
-  special_character = pattern.search(y[-1:])
-  try:
-    if special_character.group():
-      wordlist[y] = wordlist[:-1]
-  except:
-    continue
-
-wordfreq = [wordlist.count(w) for w in wordlist]
-
-print("String\n {} \n".format(wordstring))
-print("List\n {} \n".format(str(wordlist)))
-print("Frequencies\n {} \n".format(str(wordfreq)))
-print("Pairs\n {}".format(str(dict(zip(wordlist, wordfreq)))))
+value = pprint.pformat(count)
+print(value)
