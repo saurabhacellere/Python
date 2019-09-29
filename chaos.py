@@ -2,7 +2,7 @@
 
 
 def main():
-    print("This program illustrates a chaotic function")
+    print ("This program illustrates a chaotic function")
 
     while True:
         try:
@@ -15,8 +15,8 @@ def main():
             print("Please enter correct number")
 
     for i in range(10):
-        x = 3.9 * x * (1 - x)
-        print(x)
+        x = 3.9 * x * (1-x)
+        print (x)
 
 
 if __name__ == '__main__':

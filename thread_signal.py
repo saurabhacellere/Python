@@ -1,4 +1,3 @@
-from __future__ import print_function
 import threading
 from time import sleep
 import signal
@@ -10,7 +9,7 @@ class producer(threading.Thread):
 
     def run(self):
         while self.event.is_set():
-            print("sub thread")
+            print "sub thread"
             sleep(2)
         else:
             print("sub thread end")
@@ -25,7 +24,7 @@ def handler(signum, frame):
 
 signal.signal(signal.SIGINT, handler)
 
-print("main thread")
+print "main thread"
 event = threading.Event()
 event.set()
 p = producer(event)
