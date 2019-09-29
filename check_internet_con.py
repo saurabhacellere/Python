@@ -1,19 +1,8 @@
-#!/usr/bin/python3
+import urllib2
 
 try:
-    # For Python 3.0 and later
-    from urllib.error import URLError
-    from urllib.request import urlopen
-except ImportError:
-    # Fall back to Python 2's urllib2
-    from urllib2 import URLError, urlopen
+    urllib2.urlopen("http://google.com", timeout=2)
+    print ("working connection")
 
-def checkInternetConnectivity():
-    try:
-        urlopen("http://google.com", timeout=2)
-        print("Working connection")
-    except URLError as E:
-        print("Connection error:%s" % E.reason)
-
-
-checkInternetConnectivity()
+except urllib2.URLError:
+    print ("No internet connection")
