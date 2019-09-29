@@ -1,4 +1,3 @@
-from __future__ import print_function
 # Script Name		: recyclebin.py
 # Author				: Craig Richards
 # Created				: 07th June 2013
@@ -21,14 +20,14 @@ def sid2user(sid):		# Start of the function to gather the user
     return user
   except:
     return sid
-
+	
 
 def returnDir():			# Start of the function to search through the recyclebin
   dirs=['c:\\Recycler\\','C:\\Recycled\\','C:\\$RECYCLE.BIN\\']
   #dirs=['c:\\$RECYCLE.BIN\\']
   for recycleDir in dirs:
     if os.path.isdir(recycleDir):
-      return recycleDir
+	  return recycleDir
   return None
   
 def findRecycled(recycleDir):	# Start of the function, list the contents of the recyclebin
@@ -36,11 +35,10 @@ def findRecycled(recycleDir):	# Start of the function, list the contents of the 
   for sid in dirList:
     files = os.listdir(recycleDir + sid)
     user = sid2user(sid)
-
-    print('\n[*] Listing Files for User: ' + str(user))
+    print '\n[*] Listing Files for User: ' + str(user)
     for file in files:
-      print('[+] Found File: ' + str(file))
-
+	  print '[+] Found File: ' + str(file)
+	  
 def main():
   recycleDir = returnDir()
   findRecycled(recycleDir)
