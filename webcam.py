@@ -1,7 +1,3 @@
-# Requirements:
-#     pip install numpy
-#     sudo apt-get install python-openCV
-
 import numpy as np
 import cv2
 
