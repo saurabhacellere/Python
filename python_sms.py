@@ -1,4 +1,3 @@
-from __future__ import print_function
 # Script Name	: python_sms.py
 # Author	: Craig Richards
 # Created	: 16th February 2017
@@ -16,25 +15,25 @@ from time import strftime
 import sqlite3
 import sys
 
-dropbox = os.getenv("dropbox")
-scripts = os.getenv("scripts")
-dbfile = ("database/maindatabase.db")
-master_db = os.path.join(dropbox, dbfile)
+dropbox= os.getenv("dropbox")
+scripts=os.getenv("scripts")
+dbfile=("database/maindatabase.db")
+master_db=os.path.join(dropbox, dbfile)
 
-f = open(scripts+'/output/student.txt','a')
+f=open(scripts+'/output/student.txt','a')
 
-tdate = strftime("%d-%m")
+tdate=strftime("%d-%m")
 
 conn = sqlite3.connect(master_db)
 cursor = conn.cursor()
-loc_stmt = 'SELECT name, number from table'
+loc_stmt='SELECT name, number from table'
 cursor.execute(loc_stmt)
 while True:							
   row = cursor.fetchone()	
   if row == None:
     break
-  sname = row[0]
-  snumber = row[1]
+  sname=row[0]
+  snumber=row[1]
 
   message = (sname + ' There will be NO training tonight on the ' + tdate + ' Sorry for the late notice, I have sent a mail as well, just trying to reach everyone, please do not reply to this message as this is automated')
 
@@ -64,15 +63,14 @@ while True:
   postdata = urllib.urlencode(values)
   req = urllib2.Request(url, postdata)
 
-  print('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate)
-  f.write('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate + '\n')
+  print ('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate)
+  f.write ('Attempting to send SMS to '+ sname + ' at ' + snumber + ' on ' + tdate + '\n')
 
   try:
     response = urllib2.urlopen(req)
     response_url = response.geturl()
-    if response_url == url:
-
-      print('SMS sent!')
-  except urllib2.URLError as e:
-    print('Send failed!')
-    print(e.reason)
+    if response_url==url:
+      print 'SMS sent!'
+  except urllib2.URLError, e:
+    print 'Send failed!'
+    print e.reason
