@@ -1,24 +1,22 @@
 # batch_file_rename.py
 # Created: 6th August 2012
 
-"""
+'''
 This will batch rename a group of files in a given directory,
 once you pass the current and new extensions
-"""
-
-# just checking
+'''
+#just checking
 __author__ = 'Craig Richards'
 __version__ = '1.0'
 
 import os
 import argparse
 
-
 def batch_rename(work_dir, old_ext, new_ext):
-    """
+    '''
     This will batch rename a group of files in a given directory,
     once you pass the current and new extensions
-    """
+    '''
     # files = os.listdir(work_dir)
     for filename in os.listdir(work_dir):
         # Get the file extension
@@ -27,7 +25,7 @@ def batch_rename(work_dir, old_ext, new_ext):
         # Start of the logic to check the file extensions, if old_ext = file_ext
         if old_ext == file_ext:
             # Returns changed name of the file with new extention
-            newfile = split_file[0] + new_ext
+            newfile = split_file[0] + new_ext 
 
             # Write the files
             os.rename(
@@ -35,20 +33,17 @@ def batch_rename(work_dir, old_ext, new_ext):
                 os.path.join(work_dir, newfile)
             )
 
-
 def get_parser():
     parser = argparse.ArgumentParser(description='change extension of files in a working directory')
-    parser.add_argument('work_dir', metavar='WORK_DIR', type=str, nargs=1,
-                        help='the directory where to change extension')
+    parser.add_argument('work_dir', metavar='WORK_DIR', type=str, nargs=1, help='the directory where to change extension')
     parser.add_argument('old_ext', metavar='OLD_EXT', type=str, nargs=1, help='old extension')
     parser.add_argument('new_ext', metavar='NEW_EXT', type=str, nargs=1, help='new extension')
     return parser
 
-
 def main():
-    """
+    '''
     This will be called if the script is directly invoked.
-    """
+    '''
     # adding command line argument
     parser = get_parser()
     args = vars(parser.parse_args())

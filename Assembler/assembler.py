@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sys
 
 lines = [] # contains the lines of the file. 
@@ -152,7 +151,7 @@ def scanner(string):
             elif ch == '_': # catch label for subprogram
 
                 state = 40
-                # not catches the character _
+                # not catch the character _
 
             elif ch == 'r': # catch ret-command
 
@@ -928,7 +927,7 @@ def scan():
         try:
             scanner(line)
         except InvalidSyntax:
-            print("line=",line)
+            print "line=",line
     
 def parser():
     """
@@ -955,7 +954,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found argument!")
+                print "Error: Not found argument!"
                 return
 
             # TODO use token.t for this stuff
@@ -968,10 +967,10 @@ def parser():
                     pointer += 1
                     token = tokens[pointer]
                 else:
-                    print("Error: Not found argument!")
+                    print "Error: Not found argument!"
                     return
 
-                # converts the token into float, if token contains only digits.
+                # converts the token into float, if token contains olny digits.
                 # TODO response of float
                 if token.t == "identifier":     # for variables
 
@@ -979,7 +978,7 @@ def parser():
                     if token.token in variables:
                         token.token = variables[token.token]
                     else:
-                        print("Error: undefine variable! --> " + token.token)
+                        print "Error: undefine variable! --> " + token.token
                         return
                 elif token.t == "string":
                     pass
@@ -1013,7 +1012,7 @@ def parser():
 
             else:
 
-                print("Error: No found register!")
+                print "Error: No found register!"
                 return
 
         elif token.token == "add":    # add commando
@@ -1029,11 +1028,11 @@ def parser():
                     pointer += 1
                     token = tokens[pointer]
                 else:
-                    print("Error: Not found number!")
+                    print "Error: Not found number!"
                     return
 
 
-                # converts the token into float, if token contains only digits.
+                # converts the token into float, if token contains olny digits.
                 if token.t == "register":
                     
                     # for the case that token is register
@@ -1052,7 +1051,7 @@ def parser():
                     token.token = float(token.token[1:])
                     token.token *= -1
                 else:
-                    print("Error: ", token," is not a number!")
+                    print "Error: ", token," is not a number!"
                     return
 
 
@@ -1094,7 +1093,7 @@ def parser():
 
             else:
 
-                print("Error: Not found register!")
+                print "Error: No found register!"
                 return
 
         elif token.token == "sub":  # sub commando
@@ -1110,10 +1109,10 @@ def parser():
                     pointer += 1
                     token = tokens[pointer]
                 else:
-                    print("Error: Not found number!")
+                    print "Error: Not found number!"
                     return
 
-                # converts the token into float, if token contains only digits.
+                # converts the token into float, if token contains olny digits.
                 if token.t == "register":
 
                     # for the case that token is register
@@ -1134,14 +1133,14 @@ def parser():
                     token.token = float(token.token[1:])
                     token.token *= -1
                 else:
-                    print("Error: ", token.token," is not a number!")
+                    print "Error: ", token.token," is not a number!"
                     return
 
 
                 if tmpToken.token == "eax":
                     eax -= token.token
 
-                    # updated zero flag
+                    # update zero flag
                     if eax == 0:
                         zeroFlag = True
                     else:
@@ -1173,7 +1172,7 @@ def parser():
 
             else:
 
-                print("Error: No found register!")
+                print "Error: No found register!"
                 return
 
         elif token.token == "int": # int commando 
@@ -1184,7 +1183,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found argument!")
+                print "Error: Not found argument!"
                 return
 
             if token.token == "0x80": # system interrupt 0x80
@@ -1192,10 +1191,10 @@ def parser():
                 if eax == 1:    # exit program
 
                     if ebx == 0:
-                        print("END PROGRAM")
+                        print "END PROGRAM"
                         return
                     else:
-                        print("END PROGRAM WITH ERRORS")
+                        print "END PROGRAM WITH ERRORS"
                         return
 
                 elif eax == 3:
@@ -1204,7 +1203,7 @@ def parser():
 
                 elif eax == 4: # output informations
 
-                    print(ecx)
+                    print ecx
 
                     
         elif token.token == "push":   # push commando
@@ -1216,7 +1215,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found register!")
+                print "Error: Not found register!"
                 return
 
             # pushing register on the stack
@@ -1246,7 +1245,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found register!")
+                print "Error: Not found register!"
                 return
 
             # pop register from stack
@@ -1277,7 +1276,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found label!")
+                print "Error: Not found label!"
                 return
 
             if token.t == "label":
@@ -1285,7 +1284,7 @@ def parser():
                 pointer = jumps[token.token] 
 
             else:
-                print("Error: expected a label!")
+                print "Error: expected a label!"
 
 
         elif token.token == "cmp":
@@ -1296,7 +1295,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer]
             else:
-                print("Error: Not found argument!")
+                print "Error: Not found argument!"
                 return
 
             if token.t == "register":
@@ -1307,7 +1306,7 @@ def parser():
                     pointer += 1
                     tmpToken = tokens[pointer] # next register
                 else:
-                    print("Error: Not found register!")
+                    print "Error: Not found register!"
                     return
 
                 # actual comparing
@@ -1436,7 +1435,7 @@ def parser():
 
             
             else:
-                print("Error: Not found register!")
+                print "Error: Not found register!"
                 return
 
         
@@ -1447,7 +1446,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer] # next register
             else:
-                print("Error: Not found argument")
+                print "Error: Not found argument"
                 return
 
             # check of label
@@ -1460,7 +1459,7 @@ def parser():
 
             else:
 
-                 print("Error: Not found label")
+                 print "Error: Not found label"
                  return
 
 
@@ -1474,7 +1473,7 @@ def parser():
                     pointer += 1
                     tmpToken = tokens[pointer] # next register
                 else:
-                    print("Error: Not found argument")
+                    print "Error: Not found argument"
                     return
 
                 if tmpToken.t == "command" and tmpToken.token == "db":
@@ -1484,7 +1483,7 @@ def parser():
                         pointer += 1
                         tmpToken = tokens[pointer] # next register
                     else:
-                        print("Error: Not found argument")
+                        print "Error: Not found argument"
                         return
 
                     if tmpToken.t == "value" or tmpToken.t == "string":
@@ -1497,7 +1496,7 @@ def parser():
 
                 else:
 
-                    print("Error: Not found db-keyword")
+                    print "Error: Not found db-keyword"
                     return
 
         elif token.token == "call":     # catch the call-command
@@ -1507,7 +1506,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer] # next register
             else:
-                print("Error: Not found subprogram label")
+                print "Error: Not found subprogram label"
                 return
 
 
@@ -1522,12 +1521,12 @@ def parser():
                 
                 else: # error case
 
-                    print("Error: Unknow subprogram!")
+                    print "Error: Unknow subprogram!"
                     return
 
             else:   # error case
 
-                print("Error: Not found subprogram")
+                print "Error: Not found subprogram"
                 return
 
         
@@ -1539,7 +1538,7 @@ def parser():
 
             else: # error case
 
-                print("Error: No return adress on stack")
+                print "Error: No return adress on stack"
                 return
 
         elif token.t == "subprogram":
@@ -1554,7 +1553,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer] # next register
             else:
-                print("Error: Not found argument")
+                print "Error: Not found argument"
                 return
 
             if token.t == "register":
@@ -1577,7 +1576,7 @@ def parser():
 
             else:
 
-                print("Error: Not found register")
+                print "Error: Not found register"
                 return
 
 
@@ -1589,7 +1588,7 @@ def parser():
                 pointer += 1
                 token = tokens[pointer] # next register
             else:
-                print("Error: Not found argument")
+                print "Error: Not found argument"
                 return
 
             if token.t == "register":
@@ -1612,7 +1611,7 @@ def parser():
 
             else:
 
-                print("Error: Not found register")
+                print "Error: Not found register"
                 return
 
 
@@ -1623,7 +1622,7 @@ def parser():
 
 def registerLabels():
     """
-        This function search for labels / subprogram-labels and registers this in the 'jumps' list.
+        This function search for labels / subprogram-labels and register this in the 'jumps' list.
     """
     for i in range(len(tokens)):
         if (tokens[i].t == "label"):
@@ -1653,7 +1652,7 @@ def resetInterpreter():
 # DEBUG FUNCTION
 # def printTokens():
 #     for token in tokens:
-#         print(token.token, " --> ", token.t)
+#         print token.token, " --> ", token.t
 
 
 # main program
@@ -1676,8 +1675,11 @@ def main():
 
         except:
 
-            print("Error: File %s not found!" % (arg))
+            print "Error: File %s not found!" % (arg)
 
+        
 
+    
+    
 if __name__ == "__main__":
     main()

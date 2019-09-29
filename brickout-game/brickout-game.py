@@ -16,10 +16,9 @@ That includes the classes Ball, Paddle, Brick, and BrickWall.
 """
  
 import pygame
-import random
 
  
-# Define Four Colours
+# Define some colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
@@ -27,7 +26,7 @@ RED = (255, 0, 0)
 
 pygame.init()
 
-# Setting the width and height of the screen [width, height]
+# Set the width and height of the screen [width, height]
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 
@@ -41,15 +40,11 @@ class Ball(object):
         self._radius = radius
         self._xLoc = x
         self._yLoc = y
-        self.__xVel = 7
-        self.__yVel = 2
+        self.__xVel = 5
+        self.__yVel = -3
         w, h = pygame.display.get_surface().get_size()
         self.__width = w
         self.__height = h
-    def getXVel(self):
-        return self.__xVel
-    def getYVel(self):
-        return self.__yVel
     def draw(self):
         """
             draws the ball onto screen.
@@ -62,28 +57,24 @@ class Ball(object):
         """
         self._xLoc += self.__xVel
         self._yLoc += self.__yVel
-        #left screen wall bounce
-        if self._xLoc <= self._radius:
+        if self._xLoc == self._radius:
             self.__xVel *= -1
-        #right screen wall bounce
         elif self._xLoc >= self.__width - self._radius:
             self.__xVel *= -1
-        #top wall bounce
-        if self._yLoc <= self._radius:
+        if self._yLoc == self._radius:
             self.__yVel *= -1
-        #bottom drop out
-        elif self._yLoc >= self.__width - self._radius:
+        elif self._yLoc >= self.__height - self._radius:
             return True
 
         # for bouncing off the bricks.
         if brickwall.collide(self):
             self.__yVel *= -1
 
-        # collision detection between ball and paddle
+        # collision deection between ball and paddle
+        paddleX = paddle._xLoc
         paddleY = paddle._yLoc
         paddleW = paddle._width
         paddleH = paddle._height
-        paddleX = paddle._xLoc
         ballX = self._xLoc
         ballY = self._yLoc
 
@@ -155,14 +146,14 @@ class Brick (pygame.sprite.Sprite):
         self.__isInGroup = False
     def alive(self):
         """
-            returns true when this brick belongs to the brick wall.
+            returns true when this brick is belong to the brick wall.
             otherwise false
         """
         return self.__isInGroup
 
     def collide(self, ball):
         """
-            collision detection between ball and this brick
+            collision deection between ball and this brick
         """
         brickX = self._xLoc
         brickY = self._yLoc
@@ -170,16 +161,13 @@ class Brick (pygame.sprite.Sprite):
         brickH = self._height
         ballX = ball._xLoc
         ballY = ball._yLoc
-        ballXVel = ball.getXVel()
-        ballYVel = ball.getYVel()
+        radius = ball._radius
 
-
-        if ((ballX + ball._radius) >= brickX and (ballX+ball._radius) <= (brickX + brickW)) \
-        and ((ballY - ball._radius) >= brickY and (ballY - ball._radius)\
-             <= (brickY + brickH)):
+        if ((ballX + radius) >= brickX and ballX <= (brickX + brickW)) \
+        and ((ballY + radius) >= brickY and ballY <= (brickY + brickH)):
             return True
-        else:
-            return False
+
+        return False
 
 
 """
@@ -249,7 +237,7 @@ class BrickWall (pygame.sprite.Group):
         return False
 
 # The game objects ball, paddle and brick wall
-ball = Ball(screen,25, random.randint(1,700),250)
+ball = Ball(screen,25,350,250)
 paddle = Paddle(screen,100,20,250,450)
 brickWall = BrickWall(screen,25,25,150,50)
 
@@ -271,13 +259,13 @@ pygame.font.init() # you have to call this at the start,
                    # if you want to use this module.
 
 # message for game over
-mgGameOver = pygame.font.SysFont('Comic Sans MS', 40)
+mgGameOver = pygame.font.SysFont('Comic Sans MS', 60)
 
 # message for winning the game.
-mgWin = pygame.font.SysFont('Comic Sans MS', 40)
+mgWin = pygame.font.SysFont('Comic Sans MS', 60)
 
 # message for score
-mgScore = pygame.font.SysFont('Comic Sans MS', 40)
+mgScore = pygame.font.SysFont('Comic Sans MS', 60)
 
 textsurfaceGameOver = mgGameOver.render('Game Over!', False, (0, 0, 0))
 textsurfaceWin = mgWin.render("You win!",False,(0,0,0))
